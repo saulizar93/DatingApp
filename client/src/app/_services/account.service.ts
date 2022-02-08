@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, ReplaySubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
-  baseUrl = 'https://localhost:5001/api/';
+  baseUrl = environment.apiUrl;
   // ReplaySubject is a buffer object. It emits the last value inside it everytime it's subscribed to
   private currentUserSource = new ReplaySubject<User>(1); // stores 1 version of User objects
   currentUser$ = this.currentUserSource.asObservable();
