@@ -25,6 +25,16 @@ namespace API.Helpers
             
             // create mapping from Photo to  PhotoDto
             CreateMap<Photo, PhotoDto>();
+            CreateMap<MemberUpdateDto, AppUser>();
+            CreateMap<RegisterDto, AppUser>(); 
+            CreateMap<Message, MessageDto>()
+                .ForMember(dest => dest.SenderPhotoUrl, 
+                           opt => opt.MapFrom(
+                               src => src.Sender.Photos.FirstOrDefault(x => x.IsMain).Url))
+                .ForMember(dest => dest.RecipientPhotoUrl, 
+                           opt => opt.MapFrom(
+                               src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url
+                           ));
         }
 
         // since this will become an injectable service, it needs to be added to our service extensions in ApplicationServiceExtensions

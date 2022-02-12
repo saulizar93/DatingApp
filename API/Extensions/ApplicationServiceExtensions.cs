@@ -18,9 +18,21 @@ namespace API.Extensions
         //this keyword to extend the IServiceCollection
         public static IServiceCollection AddApplicationServices(this IServiceCollection services, IConfiguration config)
         {
+            // feed CloudinarySettings class with settings in appsettings.json section CloudinarySettings
+            services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             // AddTransient is limited as soon as the method is completed
             // AddScoped is limited to http request
             services.AddScoped<ITokenService, TokenService>();
+
+            // Cloudinary service (services are singletons)
+            services.AddScoped<IPhotoService, PhotoService>();
+
+            services.AddScoped<ILikesRepository, LikesRepository>();
+
+            services.AddScoped<IMessageRepository, MessageRepository>();
+
+            // update the lastActive property of the user
+            services.AddScoped<LogUserActivity>();
 
             // add the service for our repository
             services.AddScoped<IUserRepository, UserRepository>();

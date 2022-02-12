@@ -39,10 +39,9 @@ namespace API.Entities
         // Entity Framework adds a AppUserId to Photos table because it recognized the relationship
         public ICollection<Photo> Photos { get; set; }
 
-        // the Get in GetAge is a must 
-        // public int GetAge()
-        // {
-        //     return DateOfBirth.CalculateAge();
-        // }
+        public ICollection<UserLike> LikedByUsers { get; set; }
+        public ICollection<UserLike> LikedUsers { get; set; }
+        public ICollection<Message> MessagesSent { get; set; }
+        public ICollection<Message> MessagesReceived { get; set; }
     }
 }

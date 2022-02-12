@@ -11,7 +11,7 @@ namespace API.Entities
         public string Url { get; set; }
 
         public bool IsMain { get; set; }
-
+        // PublicId added for Cloudinary
         public string PublicId { get; set; }
 
         // add these two property to fully define the relationship between AppUser and Photos for Entity Framework
