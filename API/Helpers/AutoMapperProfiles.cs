@@ -35,6 +35,7 @@ namespace API.Helpers
                            opt => opt.MapFrom(
                                src => src.Recipient.Photos.FirstOrDefault(x => x.IsMain).Url
                            ));
+            // CreateMap<DateTime, DateTime>().ConvertUsing(d => DateTime.SpecifyKind(d, DateTimeKind.Utc));
         }
 
         // since this will become an injectable service, it needs to be added to our service extensions in ApplicationServiceExtensions
