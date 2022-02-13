@@ -1,27 +1,42 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
+<nav
+  class="navbar navbar-expand-md navbar-light fixed-top bg-primary"
+  style="background: radial-gradient(red, pink)"
+>
   <div class="container container-fluid">
-    <a class="navbar-brand" routerLink="/">Dating App</a>
+    <a class="navbar-brand" routerLink="/"
+      ><img
+        style="max-height: 50px; border: none"
+        src="./assets/brokenHeart.png"
+        class="me-2"
+      />
+      <strong>LOVE MATCHER</strong></a
+    >
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
       <ng-container *ngIf="accountService.currentUser$ | async">
         <li class="nav-item">
           <a class="nav-link" routerLink="/members" routerLinkActive="active"
-            >Matches</a
+            ><strong>MATCHES</strong></a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/lists" routerLinkActive="active"
-            >Lists</a
+            ><strong>LISTS</strong></a
           >
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/messages" routerLinkActive="active"
-            >Messages</a
+            ><strong>MESSAGES</strong></a
+          >
+        </li>
+        <li *appHasRole="['Admin', 'Moderator']" class="nav-item">
+          <a class="nav-link" routerLink="/admin" routerLinkActive="active"
+            ><strong>ADMIN</strong></a
           >
         </li>
       </ng-container>
       <li class="nav-item">
         <a class="nav-link" routerLink="/errors" routerLinkActive="active"
-          >Errors</a
+          ><strong>ERRORS</strong></a
         >
       </li>
     </ul>
@@ -34,9 +49,10 @@
       <img
         src="{{ user.photoUrl || './assets/user.png' }}"
         alt="{{ user.username }}"
+        class="img-circle rounded-circle me-2"
       />
       <a class="dropdown-toggle text-light ms-2" dropdownToggle
-        >Welcome {{ user.knownAs | titlecase }}</a
+        >Welcome {{ user.knownAs || user.username | titlecase }}</a
       >
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item" routerLink="/member/edit">Edit Profile</a>
@@ -66,7 +82,9 @@
         type="password"
         placeholder="Password"
       />
-      <button class="btn btn-success" type="submit">Login</button>
+      <button class="btn btn-success" type="submit" style="background: red">
+        Login
+      </button>
     </form>
   </div>
 </nav>
